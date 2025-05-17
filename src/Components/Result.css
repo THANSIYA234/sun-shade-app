@@ -1,0 +1,45 @@
+.result{
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    z-index: 1000;
+    width:40%px;
+   
+    padding: 30px;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+background: black;
+border-radius: 10px;
+}
+ul li{
+    list-style: none;
+    padding-top: 10px;
+}
+button{
+    background-color: rgb(23, 161, 4);
+    width: 100px;
+    height: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(84, 189, 15);
+    margin-bottom: 20px;
+    margin-top: 20px;
+color: white;
+
+}
+#left{
+    color: rgb(194, 78, 24);
+    font-size: 20px;
+
+}
+#right{
+    color: yellow;
+    font-size: 20px;
+
+}
+#none{
+    color: blue;
+    font-size: 20px;
+
+}
