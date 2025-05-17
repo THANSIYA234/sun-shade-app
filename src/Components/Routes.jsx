@@ -1,4 +1,4 @@
-const API_KEY=`5b3ce3597851110001cf6248d04fb060e9034aee843333fe2fedcf79`
+const API_KEY=import.meta.env.VITE_OPENROUTESERVICE_API_KEY;
 
 
 
