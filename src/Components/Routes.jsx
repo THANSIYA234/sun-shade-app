@@ -37,7 +37,8 @@ export async function getRoutes(startPoint, endPoint) {
 
    
 
-    const coords = data.features[0].geometry.coordinates.map(coord => coord.reverse());
+    const coords = data.features[0].geometry.coordinates.map(([long, lat]) => [lat, long]);
+
     return coords;
   
 };

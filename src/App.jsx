@@ -3,7 +3,7 @@ import Input from './Components/Input';
 import { getRoutes } from './Components/Routes';
 import { getSunExposure } from './Components/SunCalc';
 import Result from './Components/Result';
-import 'leaflet/dist/leaflet.css';
+
 
 
 import { MapView } from './MapView';
@@ -35,9 +35,16 @@ const App=()=> {
     setCoords([]);
   };
   return (
-    <div>
+    <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
      <MapView coords={coords}/>
-<div className='input-div'>
+<div className='input-div' style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 1000,
+          padding: '1rem',
+          width: '100%',
+        }}>
 {!results&&<Input onSubmit={HandleCords}/>}
 {results&&<Result results={results} onBack={HandleSubmit}/>}
 </div>

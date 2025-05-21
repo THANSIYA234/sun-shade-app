@@ -1,13 +1,7 @@
-import React from 'react';
-import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
-import { useMap } from 'react-leaflet';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { MapContainer, TileLayer, Polyline, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
-
-
-export const MapView = ({coords}) => {
-
-const center=coords.length>0 ? coords[0]:[15.0, 65.0];
 const ZoomToRoute = ({ coords }) => {
   const map = useMap();
 
@@ -20,20 +14,19 @@ const ZoomToRoute = ({ coords }) => {
   return null;
 };
 
-
+export const MapView = ({ coords }) => {
+  const center = coords.length > 0 ? coords[0] : [20.5937, 78.9629];
 
   return (
-<MapContainer center={center} zoom={6}style={{height:'100vh',width:'100vw',position:'absolute',top:'0',left:'0',zIndex:0}}>
-    <TileLayer
-    url='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png'
-	minZoom={0}
-	maxZoom={20}
-	attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
-   {coords.length>0 && <Polyline positions={coords}color="cyan"/>}
-   <ZoomToRoute coords={coords} />
-</MapContainer>
+    <MapContainer center={center} zoom={13} style={{ height: '100vh', width: '100%' }}>
+     <TileLayer
+  url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+  attribution='&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+/>
 
 
-    
-  )
-}
+      {coords.length > 0 && <Polyline positions={coords} color="cyan" />}
+      <ZoomToRoute coords={coords} />
+    </MapContainer>
+  );
+};

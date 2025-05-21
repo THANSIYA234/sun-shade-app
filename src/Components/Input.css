@@ -24,7 +24,7 @@ box-shadow: 0 4px 10px  rgb(0, 14, 14);
 padding: 20px;
 border-radius: 10px;
 
-background-color:rgb(70, 73, 83);
+background-color:rgb(23, 24, 26);
 
 }
 form input:focus {
@@ -72,8 +72,8 @@ max-width: 300px;
 #submit-btn {
   padding: 8px 16px;
   font-size: 1rem;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #12b11a;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
