@@ -37,6 +37,13 @@ src/
   Components/SunCalc.js    the sun maths (unchanged, plus position helpers)
   Components/Buckets.js    the shared bucket palette
   MapView.jsx              the dark Leaflet map
+server/
+  ors-proxy.js             shared ORS proxy core (upstream calls, ranking, cache)
+api/
+  ors/geocode.js           Vercel function: GET  /api/ors/geocode
+  ors/directions/[profile].js  Vercel function: POST /api/ors/directions/:profile
+vite/
+  ors-proxy.js             dev-only middleware, wraps server/ors-proxy.js
 ```
 
 ## How it works
@@ -79,12 +86,11 @@ src/
   trees, terrain and the real horizon are not, so a tree-lined street still
   reads as full sun. The app therefore never claims a shaded-route percentage;
   the details screen states this explicitly.
-- **The ORS proxy is dev-only.** `vite/ors-proxy.js` runs inside Vite's dev
-  server; `npm run build` produces a frontend with no backend behind it. To go
-  live, mount the same handler on your host of choice (Express, Fastify,
-  Cloudflare Worker, serverless, …) and point the frontend at that URL instead
-  of `/api/ors`.
-- **Geocoding is only as good as ORS's data.** The proxy asks for five
+- **The ORS proxy runs in dev and on Vercel.** The same `server/ors-proxy.js`
+  core serves both: `vite/ors-proxy.js` mounts it as dev middleware, and the
+  functions under `api/ors/` mount it as serverless endpoints. See
+  [Deploying to Vercel](#deploying-to-vercel).
+- **Geocoding is only as good as ORS's data.** The proxy asks for three
   candidates and re-orders them by how well the name and the surrounding
   place match the query, which fixes cases such as "Central Park, New York"
   resolving to a locality called Bethpage. Some place names simply are not in
@@ -96,7 +102,7 @@ src/
   compare alternative routes.
 - **ORS free-tier quota.** The free tier allows 2000 requests per day and a
   single search spends several upstream requests. The only mitigation is the
-  dev proxy's TTL cache (24 h for geocoding, 10 min for directions); once the
+  proxy's TTL cache (24 h for geocoding, 10 min for directions); once the
   quota is spent, ORS rejects further requests until the daily reset.
 - **Timezone handling.** The departure time is currently read in the *browser's*
   timezone, so a trip entered from another zone is offset. The destination's
@@ -117,9 +123,10 @@ cp .env.example .env       # then put your ORS key into OPENROUTESERVICE_API_KEY
 npm run dev
 ```
 
-The ORS key is read **server-side** by the dev-time proxy at `vite/ors-proxy.js`.
-The browser only ever talks to `/api/ors/*`, so the key never ships in the
-client bundle.
+The ORS key is read **server-side** by the proxy core in `server/ors-proxy.js`
+— `vite/ors-proxy.js` mounts it in dev, the functions in `api/ors/` mount it on
+Vercel. The browser only ever talks to `/api/ors/*`, so the key never ships in
+the client bundle.
 
 Get a key at <https://openrouteservice.org/dev/#/signup>.
 
@@ -133,14 +140,65 @@ Get a key at <https://openrouteservice.org/dev/#/signup>.
 | `npm run lint`    | Lint JS                                      |
 | `npm test`        | Run the unit tests (`vitest run`)            |
 
-## Production note
+## Deploying to Vercel
 
-`vite/ors-proxy.js` only runs under Vite's dev server. To go live, mount the
-same handler on your host of choice (Express, Fastify, Cloudflare Worker, …)
-and point the frontend at that URL instead of `/api/ors`.
+The repo is set up for Vercel's zero-config "Other" filesystem API: the
+functions under `api/ors/` are deployed as serverless endpoints, and Vercel
+builds the frontend from `dist/`.
 
-The app uses the History API, so the host must serve `index.html` for
-`/route` and `/details` (an SPA fallback rewrite).
+### 1. Set the environment variable
+
+In the Vercel dashboard → **Project → Settings → Environment Variables**, add:
+
+| Name                       | Value                        |
+| -------------------------- | ---------------------------- |
+| `OPENROUTESERVICE_API_KEY` | your ORS API key             |
+
+Set it for **Production** and **Preview**. It is a plain server-side variable —
+it is *not* prefixed with `VITE_`, so Vite will never inline it into the
+client bundle. `.env` stays git-ignored and is only used locally.
+
+### 2. Deploy
+
+Push to `main` (Vercel's Git integration deploys it), or run:
+
+```bash
+npx vercel --prod
+```
+
+### 3. Check the endpoints
+
+```bash
+# geocoding — expect 200 and a GeoJSON "features" array
+curl -i "https://YOUR-DOMAIN.vercel.app/api/ors/geocode?text=mumbai"
+
+# directions — expect 200 and a GeoJSON FeatureCollection
+curl -i -X POST "https://YOUR-DOMAIN.vercel.app/api/ors/directions/driving-car" \
+  -H "Content-Type: application/json" \
+  -d '{"coordinates":[[72.8777,19.076],[72.8889,19.0844]]}'
+```
+
+Both accept the same routes in dev and in production, because both call the
+same core.
+
+### How the routing is laid out
+
+Vercel maps a file under `api/` to the URL of the same path, and a single
+bracketed segment to one dynamic parameter:
+
+| File                            | Route                        |
+| ------------------------------- | ---------------------------- |
+| `api/ors/geocode.js`            | `/api/ors/geocode`           |
+| `api/ors/directions/[profile].js` | `/api/ors/directions/:profile` |
+
+A catch-all file such as `api/ors/[...path].js` does **not** work here: outside
+Next.js, Vercel treats `[...path]` as one ordinary segment, so it would only
+match a single path segment and `/api/ors/directions/driving-car` would 404.
+That is why the two endpoints are separate files.
+
+`vercel.json` contains a single rewrite that serves `index.html` for the SPA
+routes (`/route`, `/details`). It explicitly excludes `/api`, so it can never
+shadow the functions above.
 
 ## Stack
 
