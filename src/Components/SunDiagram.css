@@ -1,0 +1,118 @@
+.sun-diagram {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.sun-diagram.is-dark {
+  filter: saturate(0.6) brightness(0.85);
+}
+
+.sd-ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1;
+}
+
+.sd-ring-inner {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-dasharray: 3 6;
+}
+
+.sd-tick {
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.5;
+}
+
+.sd-compass-label {
+  fill: var(--muted-2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sd-heading {
+  stroke: #9be7ff;
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+  opacity: 0.75;
+}
+
+.sd-sun {
+  fill: #ffc46b;
+}
+
+.sd-sunray {
+  stroke: #ffc46b;
+  stroke-width: 2;
+  opacity: 0.6;
+}
+
+.sd-arc {
+  fill: none;
+  stroke: rgba(255, 196, 107, 0.5);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.sd-angle-label {
+  fill: #ffc46b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sd-car {
+  fill: #1d2836;
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 1.5;
+}
+
+.sd-glass {
+  fill: rgba(155, 231, 255, 0.22);
+}
+
+.sd-front {
+  fill: #9be7ff;
+  opacity: 0.85;
+}
+
+.sd-seat {
+  opacity: 0.55;
+  stroke-width: 1.2;
+}
+
+.sd-seat-left {
+  fill: rgba(56, 168, 255, 0.35);
+  stroke: var(--blue);
+}
+
+.sd-seat-right {
+  fill: rgba(255, 133, 27, 0.35);
+  stroke: var(--orange);
+}
+
+.sd-seat.is-recommended {
+  opacity: 1;
+  stroke-width: 2;
+}
+
+.sd-seat-left.is-recommended {
+  fill: var(--blue);
+}
+
+.sd-seat-right.is-recommended {
+  fill: var(--orange);
+}
+
+.sd-centre-dot {
+  fill: var(--muted-2);
+  font-size: 12px;
+}
+
+.sd-caption {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}

@@ -1,0 +1,216 @@
+.landing {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.landing-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #060a10;
+  background-size: cover;
+  background-position: center 62%;
+  background-repeat: no-repeat;
+}
+
+/* Dark overlay: keeps the photo readable and pushes the UI into the dark theme */
+.landing-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4, 8, 13, 0.88) 0%, rgba(5, 10, 16, 0.58) 38%, rgba(5, 9, 15, 0.3) 72%, rgba(5, 9, 15, 0.5) 100%),
+    linear-gradient(180deg, rgba(4, 8, 13, 0.55) 0%, rgba(4, 8, 13, 0.08) 32%, rgba(4, 8, 13, 0.12) 62%, rgba(4, 8, 13, 0.75) 100%);
+}
+
+.landing-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ---------- Copy column ---------- */
+
+.landing-copy {
+  max-width: 640px;
+}
+
+.landing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 1.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(53, 216, 121, 0.35);
+  background: rgba(53, 216, 121, 0.1);
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.landing-title {
+  margin: 0;
+  font-size: clamp(3rem, 8.5vw, 5.4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-shadow: 0 12px 46px rgba(0, 0, 0, 0.65);
+}
+
+.landing-subtitle {
+  margin: 1rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.3vw, 1.5rem);
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.landing-lede {
+  margin: 1.15rem 0 0;
+  max-width: 560px;
+  color: var(--text-2);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.landing-highlights {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.landing-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.hl-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: rgba(17, 25, 35, 0.75);
+  color: var(--accent);
+  backdrop-filter: blur(6px);
+}
+
+.landing-highlights strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.landing-highlights em {
+  display: block;
+  font-style: normal;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.landing-copy .ghost-btn {
+  margin-top: 2rem;
+}
+
+/* ---------- Planner column ---------- */
+
+.landing-planner {
+  position: relative;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    180deg,
+    rgba(19, 27, 38, 0.82) 0%,
+    rgba(11, 17, 25, 0.88) 100%
+  );
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow: var(--shadow-lg);
+  padding: 1px;
+}
+
+.landing-notice {
+  margin: 0;
+  padding: 0.8rem 1.15rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 133, 27, 0.12);
+  color: #ffcf9a;
+  font-size: 0.86rem;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* Faint green glow under the card */
+.landing-planner::after {
+  content: '';
+  position: absolute;
+  inset: auto 12% -26px 12%;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(53, 216, 121, 0.35), transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 1080px) {
+  .landing-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .landing-copy {
+    max-width: 720px;
+  }
+
+  .landing-planner {
+    max-width: 520px;
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-hero {
+    background-position: 62% bottom;
+  }
+
+  .landing-inner {
+    padding: 1.5rem 1.1rem 3.5rem;
+    gap: 1.75rem;
+  }
+
+  .landing-lede {
+    font-size: 0.95rem;
+  }
+
+  .landing-highlights {
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+
+  .landing-scroll {
+    display: none;
+  }
+}

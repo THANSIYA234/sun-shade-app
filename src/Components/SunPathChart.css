@@ -1,0 +1,51 @@
+.sun-path-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.spc-line {
+  fill: none;
+  stroke: #ffc46b;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.spc-area-above {
+  fill: url(#aboveHorizon);
+}
+
+.spc-area-below {
+  fill: url(#belowHorizon);
+}
+
+.spc-horizon {
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
+}
+
+.spc-axis-label {
+  fill: var(--muted-2);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.spc-time {
+  fill: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.spc-dot {
+  fill: #ffc46b;
+  stroke: #0b1119;
+  stroke-width: 2;
+}
+
+.spc-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

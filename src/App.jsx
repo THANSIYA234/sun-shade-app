@@ -1,56 +1,60 @@
-import React, { useState } from 'react';
-import Input from './Components/Input';
-import { getRoutes } from './Components/Routes';
-import { getSunExposure } from './Components/SunCalc';
-import Result from './Components/Result';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { TripProvider } from './state/TripProvider';
+import { useTrip } from './state/useTrip';
+import Landing from './pages/Landing';
+import RouteOverview from './pages/RouteOverview';
+import TripDetails from './pages/TripDetails';
+import './App.css';
 
+/**
+ * Pages that show a calculated trip need one. Without it (a refresh on a deep
+ * link, for example) the visitor is sent back to the planner with a notice
+ * rather than being shown an empty or invented route.
+ */
+function RequireTrip({ children }) {
+  const { hasTrip } = useTrip();
 
-
-import { MapView } from './MapView';
-const App=()=> {
-
-  const[results,setResults]=useState(null);
-  const[coords,setCoords]=useState([]);
- 
-
-  const HandleCords=async(startPoint,endPoint,time)=>{
-    
-    const coords = await getRoutes(startPoint,endPoint);
-    if (!coords) {
-      alert("No route found. Try a different location.");
-      return;
-    }
-    
-    
-    setCoords(coords);
-    const expossureStats=  getSunExposure(coords,time);
-    const preferred=expossureStats.left<expossureStats.right ? 'Right side' : 'Left side';
-    
-    setResults({preferred, ...expossureStats});
-    
-   
+  if (!hasTrip) {
+    return (
+      <Navigate
+        to="/"
+        replace
+        state={{
+          notice:
+            'No active trip found — plan a new route to see the map and sun analysis.',
+        }}
+      />
+    );
   }
-  const HandleSubmit=()=>{
-    setResults(null);
-    setCoords([]);
-  };
-  return (
-    <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
-     <MapView coords={coords}/>
-<div className='input-div' style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: 1000,
-          padding: '1rem',
-          width: '100%',
-        }}>
-{!results&&<Input onSubmit={HandleCords}/>}
-{results&&<Result results={results} onBack={HandleSubmit}/>}
-</div>
-     
-    </div>
-  )
+
+  return children;
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <TripProvider>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route
+            path="/route"
+            element={
+              <RequireTrip>
+                <RouteOverview />
+              </RequireTrip>
+            }
+          />
+          <Route
+            path="/details"
+            element={
+              <RequireTrip>
+                <TripDetails />
+              </RequireTrip>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </TripProvider>
+    </BrowserRouter>
+  );
+}

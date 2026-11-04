@@ -1,45 +1,155 @@
-.result{
-    position: absolute;
-    top: 30px;
-    left: 50px;
-    z-index: 1000;
-    width:40%px;
-   
-    padding: 30px;
-    color: white;
-    font-size: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-background: black;
-border-radius: 10px;
-}
-ul li{
-    list-style: none;
-    padding-top: 10px;
-}
-button{
-    background-color: rgb(23, 161, 4);
-    width: 100px;
-    height: 30px;
-    margin-right: 30px;
-    border-radius: 10px;
-    border: 1px solid rgb(84, 189, 15);
-    margin-bottom: 20px;
-    margin-top: 20px;
-color: white;
+/* ==========================================================================
+   Sun exposure breakdown panel
+   ========================================================================== */
 
+.result {
+  color: var(--text);
+  font-family: var(--font-body);
 }
-#left{
-    color: rgb(194, 78, 24);
-    font-size: 20px;
 
+.result header {
+  margin-bottom: 0.95rem;
 }
-#right{
-    color: yellow;
-    font-size: 20px;
 
+.result .eyebrow {
+  font-size: 0.73rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
 }
-#none{
-    color: blue;
-    font-size: 20px;
 
+.result h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.result .when {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.result .when + .when {
+  color: var(--muted-2);
+}
+
+.pref {
+  font-weight: 800;
+}
+
+/* Side colours come from the shared bucket palette (src/Components/Buckets.js):
+   blue = left, orange = right — readable for deuteranopia and protanopia. */
+.recommend-Left  { color: var(--bucket-left); }
+.recommend-Right { color: var(--bucket-right); }
+.recommend-Either { color: var(--accent); }
+
+.bar {
+  display: flex;
+  height: 14px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0.9rem 0 0.7rem;
+  border: 1px solid var(--border);
+}
+
+.bar .seg {
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.bar .seg:last-child {
+  border-right: none;
+}
+
+.seg-left  { background: var(--bucket-left); }
+.seg-right { background: var(--bucket-right); }
+.seg-front { background: var(--bucket-front); }
+.seg-back  { background: var(--bucket-back); }
+.seg-dark  { background: var(--bucket-dark); }
+
+.legend {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  font-size: 0.83rem;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-2);
+}
+
+.legend li strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.dot-left  { background: var(--bucket-left); }
+.dot-right { background: var(--bucket-right); }
+.dot-front { background: var(--bucket-front); }
+.dot-back  { background: var(--bucket-back); }
+.dot-dark  { background: var(--bucket-dark); }
+
+.explain {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0.75rem 0 0.9rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-2);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.explain svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--orange);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex: 1;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #04150c;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.62rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), filter 0.18s var(--ease);
+}
+
+.actions button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
 }

@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Dark themed Leaflet map
+   ========================================================================== */
+
+.mapview {
+  background: #0a1018;
+}
+
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #06121a;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.custom-marker-start { background: #9be7ff; }
+.custom-marker-end   { background: #ff851b; }
+
+/* Match Leaflet popups to the dark theme */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #16202c;
+  color: #f3f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+}
+
+.leaflet-popup-content {
+  margin: 0.7rem 0.9rem;
+  font-size: 0.85rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  background: rgba(8, 13, 20, 0.72);
+  color: #93a1b5;
+  font-size: 0.68rem;
+  border-radius: 8px 0 0 0;
+  padding: 2px 8px;
+}
+
+.leaflet-container .leaflet-control-attribution a {
+  color: #9be7ff;
+}
+
+/* Zoom controls */
+.leaflet-container .leaflet-control-zoom {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-container .leaflet-control-zoom a {
+  background: rgba(17, 25, 35, 0.92);
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 1.05rem;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.leaflet-container .leaflet-control-zoom a:hover {
+  background: #35d879;
+  color: #04150c;
+}

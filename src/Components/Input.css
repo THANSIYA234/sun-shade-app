@@ -1,86 +1,165 @@
-*{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-body{
- 
-  font-family: 'Inter', sans-serif;
-  padding: 2rem;
-
- display: flex;
- align-items: center;
- justify-content: center;
- 
+.planner {
+  padding: 1.6rem 1.5rem 1.4rem;
 }
 
-
-.container{
-position: absolute;
-top: 9%;
-left: 38px;
-z-index: 1000;
-box-shadow: 0 4px 10px  rgb(0, 14, 14);
-padding: 20px;
-border-radius: 10px;
-
-background-color:rgb(23, 24, 26);
-
+.planner-head {
+  margin-bottom: 1.35rem;
 }
-form input:focus {
-background: transparent;
-color: white;
-outline: none;
-box-shadow: none;
+
+.planner-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.55rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
-form input{
+
+.planner-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.planner-sub {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.planner-form {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.planner .field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.planner .field label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field-control {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.15rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(8, 13, 20, 0.6);
+  color: var(--muted);
+  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease),
+    background 0.18s var(--ease);
+}
+
+.field-control:focus-within {
+  border-color: rgba(53, 216, 121, 0.6);
+  background: rgba(8, 13, 20, 0.85);
+  box-shadow: 0 0 0 3px rgba(53, 216, 121, 0.12);
+}
+
+.field-control.has-error {
+  border-color: rgba(255, 133, 27, 0.65);
+  box-shadow: 0 0 0 3px rgba(255, 133, 27, 0.1);
+}
+
+.field-control input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.72rem 0;
   border: none;
-  border-bottom: 2px solid #faf7f7;
   background: transparent;
-  padding: 8px 0;
-  font-size: 1rem;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.field-control input::placeholder {
+  color: var(--muted-2);
+}
+
+.field-control input:focus {
   outline: none;
-  transition: border-color 0.3s ease;
-
-}
-form input:hover{
-  border-bottom: 2px solid #030303;
-}
-form input:focus {
-  border-bottom: 2px solid #42d409;
-}
-h1{
-color: white;
-
-}
-h4 {
- margin-top: 1rem;
- color: white;
-}
-.form-container{
-  padding-top: 1rem;
-}
-#start-point,#end-point{
-width: 100%;
-max-width: 300px;
-  margin-bottom: 1rem;
-
 }
 
-
-
-#submit-btn {
-  padding: 8px 16px;
-  font-size: 1rem;
-  background-color: #12b11a;
-  color: #ffffff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 2rem;
+.field-control input[type='datetime-local'] {
+  color-scheme: dark;
 }
 
-#submit-btn:hover {
-  background-color: #dde7d9;
+.field-error {
+  margin: 0;
+  color: #ffb27a;
+  font-size: 0.78rem;
+}
+
+.planner-error {
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 133, 27, 0.4);
+  background: rgba(255, 133, 27, 0.12);
+  color: #ffcf9a;
+  font-size: 0.85rem;
+}
+
+.planner .primary-btn {
+  margin-top: 0.35rem;
+}
+
+/* ---------- Suggestions ---------- */
+
+.suggestions {
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.suggest-label {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-2);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background 0.18s var(--ease), border-color 0.18s var(--ease),
+    color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+
+.chip:hover {
+  background: rgba(53, 216, 121, 0.12);
+  border-color: rgba(53, 216, 121, 0.4);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .planner {
+    padding: 1.25rem 1.1rem 1.15rem;
+  }
 }

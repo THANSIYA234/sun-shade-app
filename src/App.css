@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Shared application shell — used by the route overview and details pages
+   ========================================================================== */
+
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(1100px 520px at 12% -8%, rgba(53, 216, 121, 0.1), transparent 62%),
+    radial-gradient(900px 480px at 92% 0%, rgba(56, 168, 255, 0.09), transparent 60%),
+    var(--bg);
+  padding-bottom: 2.5rem;
+}
+
+/* ---------- Top navigation ---------- */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem clamp(1rem, 3vw, 2rem);
+  background: rgba(8, 13, 20, 0.82);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #04150c;
+  box-shadow: 0 8px 20px rgba(53, 216, 121, 0.3);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.topnav-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.topnav-title h1 {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.18s var(--ease), color 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.26);
+  color: var(--text);
+}
+
+.topnav-legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.legend-line {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--muted-2);
+}
+
+.legend-line.left { background: var(--blue); }
+.legend-line.right { background: var(--orange); }
+.legend-line.route { background: #9be7ff; }
+
+.legend-dot {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #06121a;
+}
+
+.legend-dot.start { background: #9be7ff; }
+.legend-dot.end { background: var(--orange); }
